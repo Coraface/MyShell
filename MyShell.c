@@ -20,7 +20,7 @@ static char *formed, *formed1;
 
 /***-------Main Programm-------***/
 int main() {
-
+	
 	int pipenum, paramsnum, com, met, isfileopen = 0;
 	int i, k, l = 0, len, j, count, lines = 0, countones, spaces;
 	int *counttabs;
