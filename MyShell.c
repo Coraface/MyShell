@@ -68,132 +68,132 @@ int main() {
       len = strlen(input);
       counttabs = (int*)malloc(len * sizeof(int));
       spaces = 0;
-			for(i = 0; i < len; i++){
-				if(input[i]=='\t') input[i]=' ';
-			}
-			for(i = 0; i < len; i++){
-				if(input[i] == ' ') counttabs[i] = 1;
-				else counttabs[i] = 0;
-			}
+      for(i = 0; i < len; i++){
+	if(input[i]=='\t') input[i]=' ';
+      }
+      for(i = 0; i < len; i++){
+	if(input[i] == ' ') counttabs[i] = 1;
+	  else counttabs[i] = 0;
+        }
 
-			i = len-1;
-			while((i >= 0) && (counttabs[i] == 1)){ 																			//countspaces after command-metraw ta telika kena meta thn entolh
-				spaces++;
-				i--;
-			}
+	i = len-1;
+	while((i >= 0) && (counttabs[i] == 1)){ 																			//countspaces after command-metraw ta telika kena meta thn entolh
+	  spaces++;
+	  i--;
+	}
 
-			while(counttabs[0] == 1){  																										// count spaces brefore command-metraw ta arxika kena prin thn entolh
-				spaces++;
-				for(j = 1; j < len; j++){																										// slide the command to the first index-olis8hsh ths entolhs gia na paei sthn arxh tou pinaka input
-					counttabs[j-1] = counttabs[j];
-					input[j-1] = input[j];
-				}
-			}
+	while(counttabs[0] == 1){  																										// count spaces brefore command-metraw ta arxika kena prin thn entolh
+		spaces++;
+		for(j = 1; j < len; j++){																										// slide the command to the first index-olis8hsh ths entolhs gia na paei sthn arxh tou pinaka input
+			counttabs[j-1] = counttabs[j];
+			input[j-1] = input[j];
+		}
+	}
 
+	countones = 0;
+	k = len-spaces;  																															// k = length of input - spaces, cpunt spaces in the middle
+	formed = malloc(k * sizeof(char)); 																						// final table with the final form of the command- telikos pinakas,h swsth entolh xwris peretairw kena
+	formed1 = malloc(k * sizeof(char));
+	i = 0;
+	j = 0;
+	while(i < k){
+		if(counttabs[i] == 0){  																										// if element is not a space -otan exei gramma
+			formed[j] = input[i];  																										// then add it in formed[]-bazw katey8eian to gramma ston formed
+			i++;
+			j++;
 			countones = 0;
-			k = len-spaces;  																															// k = length of input - spaces, cpunt spaces in the middle
-			formed = malloc(k * sizeof(char)); 																						// final table with the final form of the command- telikos pinakas,h swsth entolh xwris peretairw kena
-			formed1 = malloc(k * sizeof(char));
-			i = 0;
-			j = 0;
-			while(i < k){
-				if(counttabs[i] == 0){  																										// if element is not a space -otan exei gramma
-					formed[j] = input[i];  																										// then add it in formed[]-bazw katey8eian to gramma ston formed
+		}
+		else{
+			countones++;    																							  					// found the first space and so on...-brhka to prwto keno, k.o.k
+			if(countones == 1){
+				formed[j] = input[i]; 																									// add the one and only space i need-bazw to ena kai monadiko keno pou xreiazomai
+				j++;
+				i++;
+			}
+			else if(countones > 1){
+				while(counttabs[i] != 0){ 																							// until i find next non space char-mexri na brw to epomeno gramma
 					i++;
-					j++;
-					countones = 0;
 				}
-				else{
-					countones++;    																							  					// found the first space and so on...-brhka to prwto keno, k.o.k
-					if(countones == 1){
-						formed[j] = input[i]; 																									// add the one and only space i need-bazw to ena kai monadiko keno pou xreiazomai
-						j++;
-						i++;
+				formed[j] = input[i]; 																									// start adding the characters-ta epommena grammata
+				i++;		
+				j++;
+				countones = 0;
+			}
+		}
+	}
+
+	for(i = len-1; i >= 0; i--){  																								// count length of command- krataw to mhkos ths entolhs, orio8etw ton pinaka
+		if(counttabs[i] == 0){
+			j = i + 1;
+			break;
+		}
+	}
+
+	for(i = j; i < k; i++)	formed[i] = 0; 																				// rest of elements = 0-tous ypoloipous xarakthres apo de3ia tous bazw 0
+	for(i = 0; i < k; i++) formed1[i] = 0; 																				// formed1[] initialization-arxikopoihsh tou formed1
+
+
+	for(i = 0; i < k; i++){
+		if(formed[i] == ';') com++;   																							// count the number of ';'- metraw ta erwthmatika
+		//else if(formed[i] == '&' && formed[i+1] == '&') com = com + 2;  					// in case command included "&&" instead of ';'-an eixa anti gia ; ta &&
+	}
+
+	for(met = 0; met < com + 1; met++){
+	  j = 0;
+	while(formed[0] != ';' && formed[0] != '\0'){ 														// until i find a ';' or the end-auto ginetai mexri na brw to erwthmatiko=prwth entolh
+	formed1[j] = formed[0]; 																								// add formed[0] to formed1[j], then slide formed[]
+																																									// -olis8hsh tou formed kata 1 stoixeio aristera, ka8e fora bazw to prwto tou stoixeio ston formed 1
+	j++;
+	for(i = 0; i < strlen(formed); i++) formed[i] = formed[i+1];
+	}
+
+	if(formed[0] == ';'){ 																										// slide formed again- olis8hsh tou formed gia na mhn parei to erwthmatiko h to keno o formed1
+	for(i = 0; i < strlen(formed); i++) formed[i] = formed[i+1];
+		}
+		if(formed[0] == ' '){
+	for(i = 0; i < strlen(formed); i++) formed[i] =formed[i+1];
+		}
+		if(met == com){ 																													// is there an "exit"?-an exw exit meta apo ena erwthmatiko
+			if((formed1[0] == 'q') && (formed1[1] == 'u') && (formed1[2] == 'i') && (formed1[3] == 't')){
+				exit(0);
+			}
+					else if(isfileopen == 1 && formed1[0] != 'q'){
+						printf("quit command was not found, exiting...\n");
+						exit(0);
 					}
-					else if(countones > 1){
-						while(counttabs[i] != 0){ 																							// until i find next non space char-mexri na brw to epomeno gramma
-							i++;
-						}
-						formed[j] = input[i]; 																									// start adding the characters-ta epommena grammata
-						i++;		
-						j++;
-						countones = 0;
+			}
+																																									// now i have the next command-mexri edw exw thn pros ektelesh entolh, px thn 1h , meta thn 2h klp
+
+		pipenum = 0;
+			for(i = 0; i < strlen(formed1); i++){
+				if(formed1[i] == '|') pipenum = pipenum + 1;
+			}
+
+			if(pipenum == 0){
+				if((formed1[0] == 'c') && (formed1[1] == 'd')){														// cd case - periptwsh cd
+					create_cd(formed1);
+					for(i = 0; i < strlen(formed1); i++) formed1[i] = ' '; 									// after cd, initialize formed1-afou ginei h cd ton kanw ek neou arxikopoihsh
+				}	    																																		// if not cd case - pwriptwsh oxi cd
+				else if((formed1[0] != 'c') && (formed1[1] != 'd')){
+					paramsnum = 1;       																										// command parameters counter, starting from one-parametroi ths entolhs 3ekinwntas apo thn idia thn entolh, px ls
+					for(i = 0; i < k; i++){
+						if(formed1[i] == ' ') paramsnum = paramsnum + 1;
 					}
+					givenpar = (char**)malloc((paramsnum + 1) * sizeof(char*));							// +1 space for '\0'-ton +1 einai to teleutaio keli kai einai to \0
+					parse_and_ex(formed1, givenpar);
+					ex(givenpar);
 				}
 			}
-
-			for(i = len-1; i >= 0; i--){  																								// count length of command- krataw to mhkos ths entolhs, orio8etw ton pinaka
-				if(counttabs[i] == 0){
-					j = i + 1;
-					break;
-				}
+			else{
+				formed1[strlen(formed1)] = 0; 																						// orio8ethsh tou formed1
+	      ex_pipe(formed1, pipenum); 																								// h genikh ex_pipe poy exei kai gia pipenum >=1
 			}
-
-			for(i = j; i < k; i++)	formed[i] = 0; 																				// rest of elements = 0-tous ypoloipous xarakthres apo de3ia tous bazw 0
-			for(i = 0; i < k; i++) formed1[i] = 0; 																				// formed1[] initialization-arxikopoihsh tou formed1
-
-
-			for(i = 0; i < k; i++){
-				if(formed[i] == ';') com++;   																							// count the number of ';'- metraw ta erwthmatika
-				//else if(formed[i] == '&' && formed[i+1] == '&') com = com + 2;  					// in case command included "&&" instead of ';'-an eixa anti gia ; ta &&
-			}
-
-		  	for(met = 0; met < com + 1; met++){
-			  	j = 0;
-  		  	while(formed[0] != ';' && formed[0] != '\0'){ 														// until i find a ';' or the end-auto ginetai mexri na brw to erwthmatiko=prwth entolh
-          	formed1[j] = formed[0]; 																								// add formed[0] to formed1[j], then slide formed[]
-																																										// -olis8hsh tou formed kata 1 stoixeio aristera, ka8e fora bazw to prwto tou stoixeio ston formed 1
-          	j++;
-          	for(i = 0; i < strlen(formed); i++) formed[i] = formed[i+1];
-         	}
-
-	      	if(formed[0] == ';'){ 																										// slide formed again- olis8hsh tou formed gia na mhn parei to erwthmatiko h to keno o formed1
-          	for(i = 0; i < strlen(formed); i++) formed[i] = formed[i+1];
-	     		}
-	     		if(formed[0] == ' '){
-          	for(i = 0; i < strlen(formed); i++) formed[i] =formed[i+1];
-	     		}
-     			if(met == com){ 																													// is there an "exit"?-an exw exit meta apo ena erwthmatiko
-  	  			if((formed1[0] == 'q') && (formed1[1] == 'u') && (formed1[2] == 'i') && (formed1[3] == 't')){
-  	  				exit(0);
-  	  			}
-						else if(isfileopen == 1 && formed1[0] != 'q'){
-							printf("quit command was not found, exiting...\n");
-							exit(0);
-						}
-	  			}
-																																										// now i have the next command-mexri edw exw thn pros ektelesh entolh, px thn 1h , meta thn 2h klp
-
-		   	pipenum = 0;
-				for(i = 0; i < strlen(formed1); i++){
-					if(formed1[i] == '|') pipenum = pipenum + 1;
-				}
-
-				if(pipenum == 0){
-					if((formed1[0] == 'c') && (formed1[1] == 'd')){														// cd case - periptwsh cd
-						create_cd(formed1);
-						for(i = 0; i < strlen(formed1); i++) formed1[i] = ' '; 									// after cd, initialize formed1-afou ginei h cd ton kanw ek neou arxikopoihsh
-					}	    																																		// if not cd case - pwriptwsh oxi cd
-					else if((formed1[0] != 'c') && (formed1[1] != 'd')){
-						paramsnum = 1;       																										// command parameters counter, starting from one-parametroi ths entolhs 3ekinwntas apo thn idia thn entolh, px ls
-						for(i = 0; i < k; i++){
-							if(formed1[i] == ' ') paramsnum = paramsnum + 1;
-						}
-						givenpar = (char**)malloc((paramsnum + 1) * sizeof(char*));							// +1 space for '\0'-ton +1 einai to teleutaio keli kai einai to \0
-						parse_and_ex(formed1, givenpar);
-						ex(givenpar);
-					}
-				}
-				else{
-					formed1[strlen(formed1)] = 0; 																						// orio8ethsh tou formed1
-		      ex_pipe(formed1, pipenum); 																								// h genikh ex_pipe poy exei kai gia pipenum >=1
-				}
-  		}																																							// end of for met
-			printf("\n$ chorafas_8718 ~>");
-			scanf(" %9999[^\n]", input);
-			if((input[0] == 'e') && (input[1] == 'x') && (input[2] == 'i') && (input[3] == 't')){
-				printf("Did you mean quit?\n");
-			}
+	}																																							// end of for met
+		printf("\n$ chorafas_8718 ~>");
+		scanf(" %9999[^\n]", input);
+		if((input[0] == 'e') && (input[1] == 'x') && (input[2] == 'i') && (input[3] == 't')){
+			printf("Did you mean quit?\n");
+		}
 
   	}																																								// end of while
   	free(counttabs);
