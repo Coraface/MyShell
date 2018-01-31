@@ -242,7 +242,7 @@ int ex_pipe(char formed[], int pipenum){
   parse_and_ex(c_formed, give);
   j = 0;
   for(k = 0; k <= pipenum; k++){
-  id = fork();
+    id = fork();
     if(id == 0){
     if(k != pipenum) dup2(pipefds[j+1], 1); 																				// to 1 einai to stdout
     if((k != 0) && (j != 0)) dup2(pipefds[j-2], 0); 																// to 0 einai to stdin
