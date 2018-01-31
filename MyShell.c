@@ -37,7 +37,7 @@ int main() {
 		FILE *file;
 		if((file = fopen(batchfile, "r")) == NULL){
 			printf("File not found, exiting...");
-			exit(1);
+			exit(1); 
 		}
 		else{
 			isfileopen = 1;
