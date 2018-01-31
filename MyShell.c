@@ -309,7 +309,3 @@ void ex(char * givenpar[]){ 																												// execute command - ekt
 	}
 	else wait(NULL);
 }
-
-//Parathrhsh: den xrhsimopoiw strtok ston formed ana pipe h ana ervthmatiko giati 8a xwrisei ana pipe h ana erwthmatiko
-// alla meta den mporw na xwrisw ana keno.
-
