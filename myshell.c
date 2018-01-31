@@ -33,7 +33,7 @@ int main() {
 	}
 	if(choice == 'y'){
 		printf("Give the name of the batchfile :\n");
-		scanf("%s", batchfile);
+		scanf("%s", batchfile); 
 		FILE *file;
 		if((file = fopen(batchfile, "r")) == NULL){
 			printf("File not found, exiting...");
