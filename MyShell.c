@@ -20,53 +20,54 @@ static char *formed, *formed1;
 
 /***-------Main Programm-------***/
 int main() {
-	
-	int pipenum, paramsnum, com, met, isfileopen = 0;
-	int i, k, l = 0, len, j, count, lines = 0, countones, spaces;
-	int *counttabs;
-	char input[512], batchfile[50], choice = 'N', ch;
-	com = 0;
+  	
+  int pipenum, paramsnum, com, met, isfileopen = 0;
+  int i, k, l = 0, len, j, count, lines = 0, countones, spaces;
+  int *counttabs;
+  char input[512], batchfile[50], choice = 'N', ch;
+  com = 0;
 
-	printf("Do you want to open a batchfile?(y/n)\n");
-	while(choice != 'y' && choice != 'n'){
-		scanf("%c", &choice);
-	}
-	if(choice == 'y'){
-		printf("Give the name of the batchfile :\n");
-		scanf("%s", batchfile);
-		FILE *file; 
-		if((file = fopen(batchfile, "r")) == NULL){
-			printf("File not found, exiting...");
-			exit(1);
-		}
-		else{
-			isfileopen = 1;
-			fseek(file, 0, SEEK_SET);
-			while((ch = fgetc(file)) != EOF){
-				if(ch != '\n') input[l] = ch;
-				else{
-					input[l] = ';';
-					lines++;
-				}
-            			l++;
-			}
-			fclose(file);
-         input[l] = '\0';
-		}
-		goto a;
-	}
+  printf("Do you want to open a batchfile?(y/n)\n");
+  while(choice != 'y' && choice != 'n'){
+    scanf("%c", &choice);
+  }
+  if(choice == 'y'){
+    printf("Give the name of the batchfile :\n");
+    scanf("%s", batchfile);
+    FILE *file; 
+    if((file = fopen(batchfile, "r")) == NULL){
+      printf("File not found, exiting...");
+      exit(1);
+    }
+    else{
+      isfileopen = 1;
+      fseek(file, 0, SEEK_SET);
+      while((ch = fgetc(file)) != EOF){
+        if(ch != '\n') input[l] = ch;
 	else{
+          input[l] = ';';
+          lines++;
+        }
+        l++;
+      }
+      fclose(file);
+      input[l] = '\0';
+    }
+    goto a;
+  }
+  else{
 																																										// prompt
-		printf("$ chorafas_8718 ~>");
-		scanf(" %9999[^\n]", input);
-		len = strlen(input);
-		a:
-		/****-------------My Shell------------****/
-		while(strcmp(input , "quit") != 0){
+    printf("$ chorafas_8718 ~>");
+    scanf(" %9999[^\n]", input);
+    len = strlen(input);
+    a:
+		
+    /****-------------My Shell------------****/
+    while(strcmp(input , "quit") != 0){
 																																										// dispose empty characters and spaces - afairesh kenwn
-			len = strlen(input);
-			counttabs = (int*)malloc(len * sizeof(int));
-			spaces = 0;
+      len = strlen(input);
+      counttabs = (int*)malloc(len * sizeof(int));
+      spaces = 0;
 			for(i = 0; i < len; i++){
 				if(input[i]=='\t') input[i]=' ';
 			}
