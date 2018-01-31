@@ -155,6 +155,7 @@ int main() {
 	  }
 	  if(met == com){ 										// is there an "exit"?-an exw exit meta apo ena erwthmatiko
 	    if((formed1[0] == 'q') && (formed1[1] == 'u') && (formed1[2] == 'i') && (formed1[3] == 't')){
+	      printf("Quit command was found, exiting...");
 	      exit(0);
 	    }
 	    else if(isfileopen == 1 && formed1[0] != 'q'){
