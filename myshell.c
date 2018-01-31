@@ -307,4 +307,4 @@ void ex(char * givenpar[]){ 																												 // execute command - ek
 		exit(0);
 	}
 	else wait(NULL);
-}
+} 
