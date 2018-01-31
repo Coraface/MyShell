@@ -48,7 +48,7 @@ int main() {
 					input[l] = ';';
 					lines++;
 				}
-            l++;
+            			l++;
 			}
 			fclose(file);
          input[l] = '\0';
