@@ -286,7 +286,7 @@ int ex_pipe(char formed[], int pipenum){
 }
 
 void create_cd(char  formed[]){
-	int i;
+	int i; 
 	char * paramcd;
 	char * parampath;
 	paramcd = strtok(formed, " "); 																										// "cd" to..-pairnw to cd
