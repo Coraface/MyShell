@@ -29,7 +29,7 @@ int main() {
 
 	printf("Do you want to open a batchfile?(y/n)\n");
 	while(choice != 'y' && choice != 'n'){
-		scanf("%c", &choice);
+		scanf("%c", &choice); 
 	}
 	if(choice == 'y'){
 		printf("Give the name of the batchfile :\n");
