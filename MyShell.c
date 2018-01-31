@@ -185,8 +185,8 @@ int main() {
 	    }
           }
           else{
-	    formed1[strlen(formed1)] = 0; 								// orio8ethsh tou formed1
-	    ex_pipe(formed1, pipenum); 								        // h genikh ex_pipe poy exei kai gia pipenum >=1
+	    formed1[strlen(formed1)] = 0; 								// boundary-orio8ethsh tou formed1
+	    ex_pipe(formed1, pipenum); 								      
 	  }
 	}								                                // end of for met
         printf("\n$ chorafas_8718 ~>");
@@ -221,8 +221,8 @@ int ex_pipe(char formed[], int pipenum){
   int *pipefds;
   numpipes = 2 * pipenum;
   pipefds = malloc(numpipes * sizeof(int));
-  for(i = 0; i < pipenum; i++){
-    pipe(pipefds + (i * 2));
+  for(i = 0; i < pipenum; i++){	
+    pipe(pipefds + (i * 2));										// create the pipes
   }
   for(i = 0; i < 100; i++) c_formed[i] = 0;
   j = 0;
@@ -242,11 +242,11 @@ int ex_pipe(char formed[], int pipenum){
   give = (char**)malloc((paramsnum + 1) * sizeof(char*));
   parse_and_ex(c_formed, give);
   j = 0;
-  for(k = 0; k <= pipenum; k++){
+  for(k = 0; k <= pipenum; k++){									  // until pipenum+1 because a single pipe requires 2 commands 
     id = fork();
     if(id == 0){
-    if(k != pipenum) dup2(pipefds[j+1], 1); 								  // to 1 einai to stdout
-    if((k != 0) && (j != 0)) dup2(pipefds[j-2], 0); 							  // to 0 einai to stdin
+    if(k != pipenum) dup2(pipefds[j+1], 1); 								  // redirection of stdout-to 1 einai to stdout
+    if((k != 0) && (j != 0)) dup2(pipefds[j-2], 0); 							  // redirection of stdin-to 0 einai to stdin
     for(i = 0; i < numpipes; i++) close(pipefds[i]);
       i = execvp(give[0], give);
       if(i == -1){
