@@ -243,11 +243,11 @@ int ex_pipe(char formed[], int pipenum){
   give = (char**)malloc((paramsnum + 1) * sizeof(char*));
   parse_and_ex(c_formed, give);
   j = 0;
-  for(k = 0; k <= pipenum; k++){									  // until pipenum+1 because a single pipe requires 2 commands 
+  for(k = 0; k <= pipenum; k++){									// until pipenum+1 because a single pipe requires 2 commands 
     id = fork();
     if(id == 0){
-    if(k != pipenum) dup2(pipefds[j+1], 1); 								  // redirection of stdout-to 1 einai to stdout
-    if((k != 0) && (j != 0)) dup2(pipefds[j-2], 0); 							  // redirection of stdin-to 0 einai to stdin
+    if(k != pipenum) dup2(pipefds[j+1], 1); 								// redirection of stdout-to 1 einai to stdout
+    if((k != 0) && (j != 0)) dup2(pipefds[j-2], 0); 							// redirection of stdin-to 0 einai to stdin
     for(i = 0; i < numpipes; i++) close(pipefds[i]);
       i = execvp(give[0], give);
       if(i == -1){
@@ -291,15 +291,20 @@ void create_cd(char  formed[]){
   int i; 
   char * paramcd;
   char * parampath;
-  paramcd = strtok(formed, " "); 									    // "cd" to..-pairnw to cd
-  parampath = strtok(NULL, " "); 									    // .."parampath"-pairnw to path
-  i = chdir(parampath); 										    // change directory
-  if(i == -1) printf("'%s' directory not found.\n", parampath);
-  else if(parampath[0] == '.' && parampath[1] == '.') printf("Transfered to Home.\n");
-  else printf("Transfered to directory : %s\n", parampath);
+  if(formed[2] == 0 && formed[3] == 0){
+     chdir(getenv("HOME"));
+     printf("Transfered to Home directory.\n");
+  }
+  else{
+     paramcd = strtok(formed, " "); 									  // "cd" to..-pairnw to cd
+     parampath = strtok(NULL, " "); 									  // .."parampath"-pairnw to path
+     i = chdir(parampath); 										  // change directory
+     if(i == -1) printf("'%s' directory not found.\n", parampath);
+     else if(parampath[0] == '.' && parampath[1] == '.') printf("Transfered to Home.\n");
+     else printf("Transfered to directory : %s\n", parampath);
 }
 
-void ex(char * givenpar[]){ 										    // execute command - ektelesh ths entolhs
+void ex(char * givenpar[]){ 										  // execute command - ektelesh ths entolhs
   pid_t id;
   int i;
   id = fork();
