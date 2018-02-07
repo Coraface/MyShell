@@ -58,7 +58,7 @@ int main() {
   else{
 													// prompt
     printf("$ chorafas_8718 ~>");
-    scanf(" %9999[^\n]", input);
+    scanf(" %511[^\n]", input);
     len = strlen(input);
     a:
 		
@@ -191,7 +191,7 @@ int main() {
 	  }
 	}								                                // end of for met
         printf("\n$ chorafas_8718 ~>");
-	scanf(" %9999[^\n]", input);
+	scanf(" %511[^\n]", input);
 	if((input[0] == 'e') && (input[1] == 'x') && (input[2] == 'i') && (input[3] == 't')){
 	  printf("Did you mean quit?\n");
 	}
