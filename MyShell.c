@@ -156,10 +156,16 @@ int main() {
 	  if(met == com){ 										// is there an "exit"?-an exw exit meta apo ena erwthmatiko
 	    if((formed1[0] == 'q') && (formed1[1] == 'u') && (formed1[2] == 'i') && (formed1[3] == 't')){
 	      printf("Quit command was found, exiting...");
+	      free(counttabs);
+    	      free(givenpar);
+    	      free(formed);
 	      exit(0);
 	    }
 	    else if(isfileopen == 1 && formed1[0] != 'q'){
 	      printf("quit command was not found, exiting...\n");
+	      free(counttabs);
+              free(givenpar);
+              free(formed);
 	      exit(0);
 	    }
 	  }
@@ -197,9 +203,7 @@ int main() {
 	}
 
     }													// end of while
-    free(counttabs);
-    free(givenpar);
-    free(formed);
+  
   }
 
 }													// end of main
