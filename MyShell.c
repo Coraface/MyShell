@@ -196,12 +196,14 @@ int main() {
 	    ex_pipe(formed1, pipenum); 								      
 	  }
 	}								                                // end of for met
-        printf("\n$ chorafas_8718 ~>");
-	scanf(" %511[^\n]", input);
-	if((input[0] == 'e') && (input[1] == 'x') && (input[2] == 'i') && (input[3] == 't')){
-	  printf("Did you mean quit?\n");
-	}
-
+        if(isfileopen == 1 || fileisclosed == 1){
+	  printf("\n$ chorafas_8718 ~>");
+	  scanf(" %511[^\n]", input);
+	  if((input[0] == 'e') && (input[1] == 'x') && (input[2] == 'i') && (input[3] == 't')){
+	    printf("Did you mean quit?\n");
+	  }
+	}	    
+    
     }													// end of while
   
   }
