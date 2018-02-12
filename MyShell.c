@@ -298,22 +298,18 @@ void create_cd(char  formed[]){
   int i, id; 
   char * paramcd;
   char * parampath;
-  if(id < 0) exit(1);
-  if(id == 0){
-    if(formed[2] == 0 && formed[3] == 0){
-      chdir(getenv("HOME"));
-      printf("Transfered to Home directory.\n");
-    }
-    else{
-      paramcd = strtok(formed, " "); 									  // "cd" to..-pairnw to cd
-      parampath = strtok(NULL, " "); 									  // .."parampath"-pairnw to path
-      i = chdir(parampath); 										  // change directory
-      if(i == -1) printf("'%s' directory not found.\n", parampath);
-      else if(parampath[0] == '.' && parampath[1] == '.') printf("Transfered to upper folder.\n");
-      else printf("Transfered to directory : %s\n", parampath);
-    }
+  if(formed[2] == 0 && formed[3] == 0){
+    chdir(getenv("HOME"));
+    printf("Transfered to Home directory.\n");
   }
-  else wait(NULL); 
+  else{
+    paramcd = strtok(formed, " "); 									  // "cd" to..-pairnw to cd
+    parampath = strtok(NULL, " "); 									  // .."parampath"-pairnw to path
+    i = chdir(parampath); 										  // change directory
+    if(i == -1) printf("'%s' directory not found.\n", parampath);
+    else if(parampath[0] == '.' && parampath[1] == '.') printf("Transfered to upper folder.\n");
+    else printf("Transfered to directory : %s\n", parampath);
+  }
 }
 
 void ex(char * givenpar[]){ 										  // execute command - ektelesh ths entolhs
