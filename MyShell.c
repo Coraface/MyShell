@@ -139,6 +139,7 @@ int main() {
 	}
 
 	for(met = 0; met < com + 1; met++){
+	  for(i = 0; i < k; i++) formed1[i] = 0;
 	  j = 0;
 	  while(formed[0] != ';' && formed[0] != '\0'){ 						// until i find a ';' or the end-auto ginetai mexri na brw to erwthmatiko=prwth entolh
 	    formed1[j] = formed[0]; 									// add formed[0] to formed1[j], then slide formed[]
