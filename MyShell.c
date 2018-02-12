@@ -65,9 +65,12 @@ int main() {
     /****-------------My Shell------------****/
     while(strcmp(input , "quit") != 0){
 												        // dispose empty characters and spaces - afairesh kenwn
-      len = strlen(input);
-      counttabs = (int*)malloc(len * sizeof(int));
-      spaces = 0;
+      if(isfileopen == 1 || fileisclosed == 1){        
+	len = strlen(input);        
+	counttabs = (int*)malloc(len * sizeof(int));       
+	isfileopen == 0;   
+	spaces = 0;    
+      }
       for(i = 0; i < len; i++){
 	if(input[i]=='\t') input[i]=' ';
       }
