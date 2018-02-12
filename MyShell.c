@@ -56,8 +56,8 @@ int main() {
     goto a;
   }
   else{
-													// prompt
-    printf("$ chorafas_8718 ~>");
+    int fileisclosed = 1;											
+    printf("$ chorafas_8718 ~>");									// prompt
     scanf(" %511[^\n]", input);
     len = strlen(input);
     a:
