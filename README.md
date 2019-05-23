@@ -1,8 +1,10 @@
-# My Shell - Δημιουργία ενός διερμηνέα γραμμής εντολών-κελύφους
-<i><b><h4>By Χωραφάς Χρήστος</b></h4></i>
+# My Shell 
+# -Δημιουργία ενός διερμηνέα γραμμής εντολών-κελύφους
+# -Implementation of a command shell
+<i><b><h4>By Chorafas Christos</b></h4></i>
 
 
-Δεν χρησιμοποιήθηκε makefile, για compile : gcc MyShell.c
+No makefile was uploaded, to compile simply use: gcc MyShell.c
 
 Check my notes for more information of my implementaion.
  
